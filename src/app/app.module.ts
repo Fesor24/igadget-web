@@ -4,13 +4,14 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CoreModule } from './src/app/core/core.module';
-import { ShopModule } from './src/app/shop/shop.module';
-import { HomeModule } from './src/app/home/home.module';
+import { CoreModule } from './core/core.module';
+import { HomeModule } from './home/home.module';
+import { ShopModule } from './shop/shop.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+
   ],
   imports: [
     BrowserModule,
