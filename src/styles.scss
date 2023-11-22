@@ -4,6 +4,8 @@
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;900&display=swap');
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
 
 .segment {
   @apply px-[6rem] py-5 w-full;
@@ -12,3 +14,9 @@
 .btn-main{
   @apply bg-primary-600 text-white py-3 px-5 rounded-lg cursor-pointer transition ease-out hover:bg-primary-500 hover:translate-y-1 duration-300
 }
+
+.btn-dark{
+  @apply bg-secondary-900 text-white py-3 px-5 rounded-lg cursor-pointer transition ease-out hover:bg-secondary-700 hover:translate-y-1 duration-300
+}
+
+
