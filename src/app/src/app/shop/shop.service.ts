@@ -1,6 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import SearchParams from '../shared/models/searchparams.model';
+import ICategory from '../shared/models/category.model';
+import IBrand from '../shared/models/brand.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +14,29 @@ export class ShopService {
 
   constructor(private httpClient: HttpClient) { }
 
-  searchProducts(params: SearchParams){
-    return this.httpClient.get(this.baseUrl + `search?pageSize=${params.pageSize}
-    &pageNumber=${params.pageNumber}&searchTerm=${params.searchTerm}&sortBy=${params.sortBy}
-    &sortDirection=${params.sortDirection}&yearOfReleaseStart=${params.yearOfReleaseStart}&
-    yearOfReleaseEnd=${params.yearOfReleaseEnd}&minimumPrice=${params.minimumPrice}&
-    maximumPrice=${params.maximumPrice}&`)
+  searchProducts(searchParam: SearchParams){
+
+    let params = new HttpParams();
+
+    params = params.set('pageSize', searchParam.pageSize);
+    params = params.set('pageNumber', searchParam.pageNumber);
+    params = params.set('searchTerm', searchParam.searchTerm);
+    params = params.set('sortBy', searchParam.sortBy);
+    params = params.set('sortDirection', searchParam.sortDirection);
+    params = params.set('yearOfReleaseStart', searchParam.yearOfReleaseStart);
+    params = params.set('yearOfReleaseEnd', searchParam.yearOfReleaseEnd);
+    params = params.set('minimumPrice', searchParam.minimumPrice);
+    params = params.set('maximumPrice', searchParam.maximumPrice);
+
+    return this.httpClient.get(
+      this.baseUrl + 'search', {params});
+  }
+
+  getBrands(){
+    return this.httpClient.get<IBrand[]>(this.baseUrl + 'brands');
+  }
+
+  getCategories(){
+    return this.httpClient.get<ICategory[]>(this.baseUrl + 'categories');
   }
 }
