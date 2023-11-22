@@ -1,0 +1,53 @@
+<div>
+  <div class="flex justify-between items-center">
+    <p class="font-semibold text-xl">Filters</p>
+    <div class="flex items-center space-x-2">
+      <div class="btn-main" (click)="onSearch()">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </div>
+      <div class="btn-dark" (click)="onReset()">Reset</div>
+    </div>
+  </div>
+  <div class="mt-5">
+    <p class="font-semibold text-lg py-1">Categories</p>
+    <div class="flex w-full flex-wrap space-x-2 items-center">
+      <app-filter-item
+        *ngFor="let category of categories"
+        [filter]="category.name"
+        class="rounded-2xl shadow-sm mt-1"
+        [ngClass]="{
+          'bg-primary-900 text-secondary-200':
+            categorySelected === category.name,
+          'bg-secondary-300 text-primary-400':
+            categorySelected !== category.name
+        }"
+        (click)="onCategorySelected(category.name)"
+      >
+      </app-filter-item>
+    </div>
+  </div>
+
+  <div class="mt-5">
+    <p class="font-semibold text-lg py-1">Brands</p>
+    <div class="flex w-full flex-wrap space-x-2 items-center">
+      <app-filter-item
+        *ngFor="let brand of brands"
+        [filter]="brand.name"
+        class="rounded-2xl shadow-sm mt-1"
+        [ngClass]="{
+          'bg-primary-900 text-secondary-200': brandSelected === brand.name,
+          'bg-secondary-300 text-primary-400': brandSelected !== brand.name
+        }"
+        (click)="onBrandSelected(brand.name)"
+      >
+      </app-filter-item>
+    </div>
+  </div>
+
+  <div class="mt-5">
+    <p class="font-semibold text-lg py-1">Price<span class="font-thin text-sm italic"> (set maximum price)</span></p>
+
+    <input type="text" pInputText [(ngModel)]="value" class="w-full" />
+    <p-slider [(ngModel)]="value" class="w-full" [min]="minimumPrice" [max]="maximumPrice"></p-slider>
+  </div>
+</div>
