@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import IBrand from '../../shared/models/brand.model';
 import ICategory from '../../shared/models/category.model';
 import SearchParams from '../../shared/models/searchparams.model';
 import { ShopService } from '../../shop/shop.service';
+import IProduct from 'src/app/shared/models/product.model';
+import IPagination from 'src/app/shared/models/pagination.model';
 
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.scss'],
 })
-export class FilterComponent implements OnInit {
+export class FilterComponent implements OnInit, OnChanges {
   brands: IBrand[] = [];
   categories: ICategory[] = [];
   categorySelected: string = '';
@@ -18,12 +20,13 @@ export class FilterComponent implements OnInit {
   searchTerms: any = {};
   value = 0;
   minimumPrice = 70000;
-  maximumPrice = 3000000
+  maximumPrice = 3000000;
+  @Input() pageNumber: number = 1;
   searchParams: SearchParams = {
-    pageNumber: 1,
-    pageSize: 10,
-    sortBy: 'Category',
-    sortDirection: 'asc',
+    pageNumber: this.pageNumber,
+    pageSize: 6,
+    sortBy: '',
+    sortDirection: '',
     searchTerm: '',
     yearOfReleaseEnd: 0,
     yearOfReleaseStart: 0,
@@ -31,7 +34,19 @@ export class FilterComponent implements OnInit {
     maximumPrice: 0,
   };
 
+  @Output() productEmitter = new EventEmitter<IPagination<IProduct[]>>();
+
   constructor(private shopService: ShopService) {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+
+    if(changes['pageNumber'] && !changes['pageNumber'].firstChange){
+      this.searchParams.pageNumber = changes['pageNumber'].currentValue;
+
+      this.searchProducts();
+    }
+
+  }
 
   ngOnInit(): void {
     this.searchProducts();
@@ -41,7 +56,7 @@ export class FilterComponent implements OnInit {
 
   searchProducts() {
     this.shopService.searchProducts(this.searchParams).subscribe({
-      next: (res) => console.log(res),
+      next: (res) => this.productEmitter.emit(res),
       error: (err) => console.log(err),
     });
   }
@@ -71,9 +86,26 @@ export class FilterComponent implements OnInit {
   }
 
   onSearch() {
-    this.searchParams.searchTerm = `${this.searchTerms?.category}_${this.searchTerms?.brand}`;
-     this.searchParams.minimumPrice = 0;
-     this.searchParams.maximumPrice = this.value;
+    const category = this.searchTerms?.category
+      ? this.searchTerms?.category
+      : '';
+    const brand = this.searchTerms?.brand ? this.searchTerms?.brand : '';
+
+    let searchTerm = '';
+
+    if (category.length > 0 && brand.length > 0) {
+      searchTerm = `${category}_${brand}`;
+    } else if (category.length > 0) {
+      searchTerm = category;
+    } else if (brand.length > 0) {
+      searchTerm = brand;
+    } else {
+      searchTerm = '';
+    }
+
+    this.searchParams.searchTerm = searchTerm;
+    this.searchParams.minimumPrice = 0;
+    this.searchParams.maximumPrice = this.value;
     this.searchProducts();
   }
 
@@ -81,10 +113,10 @@ export class FilterComponent implements OnInit {
     this.searchParams.searchTerm = '';
     this.searchParams.minimumPrice = 0;
     this.searchParams.maximumPrice = 0;
-    this.searchParams.pageSize = 10;
+    this.searchParams.pageSize = 6;
     this.searchParams.pageNumber = 1;
-    this.searchParams.sortBy = 'Category';
-    this.searchParams.sortDirection = 'asc';
+    this.searchParams.sortBy = '';
+    this.searchParams.sortDirection = '';
     this.searchParams.yearOfReleaseEnd = 0;
     this.searchParams.yearOfReleaseStart = 0;
     this.brandSelected = '';
