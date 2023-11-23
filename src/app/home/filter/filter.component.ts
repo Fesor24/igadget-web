@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges,
+  OnInit, Output, SimpleChanges, signal } from '@angular/core';
 import IBrand from '../../shared/models/brand.model';
 import ICategory from '../../shared/models/category.model';
 import SearchParams from '../../shared/models/searchparams.model';
@@ -21,7 +22,7 @@ export class FilterComponent implements OnInit, OnChanges {
   value = 0;
   minimumPrice = 70000;
   maximumPrice = 3000000;
-  @Input() pageNumber: number = 1;
+  @Input() pageNumber = 1;
   searchParams: SearchParams = {
     pageNumber: this.pageNumber,
     pageSize: 6,
@@ -34,18 +35,24 @@ export class FilterComponent implements OnInit, OnChanges {
     maximumPrice: 0,
   };
 
+  filterOptions = [
+    { name: 'Name: A - Z', value: 'nameAsc' },
+    { name: 'Price: Low to High', value: 'priceAsc' },
+    { name: 'Price: High to Low', value: 'priceDesc' },
+  ];
+
+  selectedSortOption :any;
+
   @Output() productEmitter = new EventEmitter<IPagination<IProduct[]>>();
 
   constructor(private shopService: ShopService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-
-    if(changes['pageNumber'] && !changes['pageNumber'].firstChange){
+    if (changes['pageNumber'] && !changes['pageNumber'].firstChange) {
       this.searchParams.pageNumber = changes['pageNumber'].currentValue;
 
       this.searchProducts();
     }
-
   }
 
   ngOnInit(): void {
@@ -86,22 +93,9 @@ export class FilterComponent implements OnInit, OnChanges {
   }
 
   onSearch() {
-    const category = this.searchTerms?.category
-      ? this.searchTerms?.category
-      : '';
-    const brand = this.searchTerms?.brand ? this.searchTerms?.brand : '';
 
-    let searchTerm = '';
-
-    if (category.length > 0 && brand.length > 0) {
-      searchTerm = `${category}_${brand}`;
-    } else if (category.length > 0) {
-      searchTerm = category;
-    } else if (brand.length > 0) {
-      searchTerm = brand;
-    } else {
-      searchTerm = '';
-    }
+    const searchTerm = this.getSearchTerm();
+    this.getSortOption();
 
     this.searchParams.searchTerm = searchTerm;
     this.searchParams.minimumPrice = 0;
@@ -122,7 +116,48 @@ export class FilterComponent implements OnInit, OnChanges {
     this.brandSelected = '';
     this.categorySelected = '';
     this.value = 0;
+    this.selectedSortOption = undefined;
 
     this.searchProducts();
+  }
+
+  private getSearchTerm(): string{
+     const category = this.searchTerms?.category
+       ? this.searchTerms?.category
+       : '';
+     const brand = this.searchTerms?.brand ? this.searchTerms?.brand : '';
+
+     let searchTerm = '';
+
+     if (category.length > 0 && brand.length > 0) {
+       searchTerm = `${category}_${brand}`;
+     } else if (category.length > 0) {
+       searchTerm = category;
+     } else if (brand.length > 0) {
+       searchTerm = brand;
+     } else {
+       searchTerm = '';
+     }
+
+     return searchTerm;
+  }
+
+  private getSortOption() {
+    const option = this.selectedSortOption?.value;
+
+    switch(option){
+      case 'priceAsc':
+        this.searchParams.sortBy = 'Price';
+        this.searchParams.sortDirection = 'asc';
+        break;
+      case 'priceDesc':
+        this.searchParams.sortBy = 'Price';
+        this.searchParams.sortDirection = 'desc';
+        break;
+      default:
+        this.searchParams.sortBy = '';
+        this.searchParams.sortDirection = ''
+        break;
+    }
   }
 }
