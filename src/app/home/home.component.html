@@ -1,10 +1,14 @@
-<div class="segment">
+  <div class="segment h-[60rem]">
   <div class="grid grid-cols-3 gap-x-4 w-full">
-      <app-filter></app-filter>
-    <div class="col-span-2">
-      <p>Products display</p>
+      <app-filter (productEmitter)="getProducts($event)" [pageNumber]="pageNumber"></app-filter>
+    <div class="col-span-2 pl-10">
+      <app-products [products]="products" (pageNumberEmitter)="getPageNumber($event)"></app-products>
 
     </div>
   </div>
 </div>
-<app-footer class="absolute bottom-0 w-full"></app-footer>
+
+
+
+
+
