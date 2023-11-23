@@ -8,6 +8,8 @@ import { ProductItemComponent } from './product-item/product-item.component';
 import { ProductsComponent } from './products/products.component';
 import { FilterComponent } from './filter/filter.component';
 import { PaginatorModule } from 'primeng/paginator';
+import { RouterModule } from '@angular/router';
+import { HomeRoutingModule } from './home-routing.module';
 
 
 
@@ -23,7 +25,9 @@ import { PaginatorModule } from 'primeng/paginator';
     CommonModule,
     FormsModule,
     SliderModule,
-    PaginatorModule
+    PaginatorModule,
+    RouterModule,
+    HomeRoutingModule
   ]
 })
 export class HomeModule { }
