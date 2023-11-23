@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import SearchParams from '../shared/models/searchparams.model';
 import ICategory from '../shared/models/category.model';
 import IBrand from '../shared/models/brand.model';
+import IPagination from '../shared/models/pagination.model';
+import IProduct from '../shared/models/product.model';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +30,7 @@ export class ShopService {
     params = params.set('minimumPrice', searchParam.minimumPrice);
     params = params.set('maximumPrice', searchParam.maximumPrice);
 
-    return this.httpClient.get(
+    return this.httpClient.get<IPagination<IProduct[]>>(
       this.baseUrl + 'search', {params});
   }
 
