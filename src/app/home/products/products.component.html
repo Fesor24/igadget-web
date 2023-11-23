@@ -1,0 +1,12 @@
+<ng-container *ngIf="products">
+  <p class="font-semibold text-sm pb-3">Showing 1 -
+  {{products.results.length}} of {{products.totalCount}} products</p>
+<div class="grid grid-cols-3 gap-12 mb-5">
+  <app-product-item *ngFor="let product of products.results" [product]="product"></app-product-item>
+</div>
+
+<p-paginator (onPageChange)="onPageChange($event)" [first]="1" [rows]="6"
+[totalRecords]="products.totalCount"></p-paginator>
+</ng-container>
+
+
