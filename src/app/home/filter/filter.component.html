@@ -16,9 +16,9 @@
         [filter]="category.name"
         class="rounded-2xl shadow-sm mt-1"
         [ngClass]="{
-          'bg-primary-900 text-secondary-200':
+          'bg-primary-900 text-secondary-100':
             categorySelected === category.name,
-          'bg-secondary-300 text-primary-400':
+          'bg-secondary-100 text-primary-400':
             categorySelected !== category.name
         }"
         (click)="onCategorySelected(category.name)"
@@ -35,8 +35,8 @@
         [filter]="brand.name"
         class="rounded-2xl shadow-sm mt-1"
         [ngClass]="{
-          'bg-primary-900 text-secondary-200': brandSelected === brand.name,
-          'bg-secondary-300 text-primary-400': brandSelected !== brand.name
+          'bg-primary-900 text-secondary-100': brandSelected === brand.name,
+          'bg-secondary-100 text-primary-400': brandSelected !== brand.name
         }"
         (click)="onBrandSelected(brand.name)"
       >
