@@ -5,6 +5,7 @@ import ICategory from '../shared/models/category.model';
 import IBrand from '../shared/models/brand.model';
 import IPagination from '../shared/models/pagination.model';
 import IProduct from '../shared/models/product.model';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,11 @@ import IProduct from '../shared/models/product.model';
 
 export class ShopService {
 
-  baseUrl = 'http://localhost:6001/'
+
 
   constructor(private httpClient: HttpClient) { }
+
+  baseUrl = environment.apiUrl;
 
   searchProducts(searchParam: SearchParams){
 
