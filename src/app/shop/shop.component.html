@@ -1,2 +1,29 @@
-<p>shop works!</p>
-<p>This is product id: {{productId}}</p>
+<div class="w-full h-full">
+  <div class="segment">
+    <div class="flex mt-5 py-5 space-x-10">
+      <div class="w-[50%]">
+        <img [src]="product.imageUrl" class="h-[24rem] w-[30rem] rounded-xl hover:scale-105
+        transition duration-500 ease-in" />
+      </div>
+      <div class="w-[50%]">
+        <h4 class="font-Lilita text-xl font-semibold">{{product.name}}</h4>
+        <p class="text-xs font-thin pt-3">{{product.description}}</p>
+        <p class="text-base font-semibold pt-2">{{product.price | currency: 'N'}}</p>
+        <div class="pt-3 flex space-x-3 items-center">
+          <div class="h-[2rem] w-[2rem] rounded-full bg-primary-300
+          flex items-center justify-center cursor-pointer">
+            <i class="fa-solid fa-plus text-secondary-100 font-extrabold"></i>
+          </div>
+          <p>2</p>
+          <div class="h-[2rem] w-[2rem] rounded-full bg-secondary-700
+          flex items-center justify-center cursor-pointer">
+            <i class="fa-solid fa-minus text-primary-100"></i>
+          </div>
+          <div class="btn-main">
+            <i class="fa-solid fa-basket-shopping"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
