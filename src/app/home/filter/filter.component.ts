@@ -105,6 +105,7 @@ export class FilterComponent implements OnInit, OnChanges {
 
   onReset() {
     this.searchParams.searchTerm = '';
+    this.searchTerms = {};
     this.searchParams.minimumPrice = 0;
     this.searchParams.maximumPrice = 0;
     this.searchParams.pageSize = 6;
