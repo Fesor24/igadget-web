@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ShopComponent } from './shop.component';
 import {HttpClientModule} from '@angular/common/http';
 import { ShopRoutingModule } from './shop-routing.module';
+import { productResolver } from './product.resolver';
 
 
 
