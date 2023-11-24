@@ -41,4 +41,8 @@ export class ShopService {
   getCategories(){
     return this.httpClient.get<ICategory[]>(this.baseUrl + 'categories');
   }
+
+  getProduct(productId: string | null){
+    return this.httpClient.get<IProduct>(this.baseUrl + `products/${productId}`)
+  }
 }
