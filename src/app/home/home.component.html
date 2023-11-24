@@ -1,6 +1,6 @@
 <div class="w-full py-5 bg-primary-100">
   <div class="flex justify-evenly items-center py-[3rem]">
-    <h3 class="text-left w-[50%] text-5xl font-extrabold">Shop for your gadgets with <span class="text-primary-900">ease</span></h3>
+    <h3 class="text-left w-[50%] text-5xl font-extrabold text-secondary-700 font-Lilita">Effortlessly browse for your<span class="text-primary-900"> gadgets</span></h3>
     <div class="h-[17.3rem] w-[17.3rem] rounded-full bg-primary-300 flex justify-center items-center">
       <img class="h-[17rem] w-[17rem] rounded-full"
         src="https://dm0qx8t0i9gc9.cloudfront.net/thumbnails/video/QIAQ9Rd/videoblocks-smartphone-with-webpage-template-telemedicine-app-animation-4k-video-animated_bw8b7i3pu_thumbnail-1080_01.png">
@@ -8,7 +8,8 @@
   </div>
 
 </div>
-  <div class="segment mt-[2rem]">
+<div class="w-full py-5">
+   <div class="segment mt-[2rem]">
   <div class="grid grid-cols-3 gap-x-4 w-full">
       <app-filter (productEmitter)="getProducts($event)" [pageNumber]="pageNumber"></app-filter>
     <div class="col-span-2 pl-10">
@@ -17,6 +18,8 @@
     </div>
   </div>
 </div>
+</div>
+
 
 
 
