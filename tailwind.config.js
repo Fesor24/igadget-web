@@ -4,6 +4,7 @@ module.exports = {
   theme: {
     fontFamily: {
       Poppins: ["Poppins", "sans-serif"],
+      Lilita: ["Lilita One", "sans-serif"],
     },
     container: {
       center: true,
@@ -33,6 +34,12 @@ module.exports = {
           700: "#334155",
           800: "#1e293b",
           900: "#0f172a",
+        },
+        dark: {
+          200: "#555555",
+          300: "#36454F",
+          400: "#1B1212",
+          600: "#000000",
         },
       },
     },
