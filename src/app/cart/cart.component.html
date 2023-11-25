@@ -1,1 +1,64 @@
-<p>cart works!</p>
+<div *ngIf="(cart$ | async) === null; else cart" class="segment h-screen">
+  <div class="flex items-center justify-center pt-5">
+    <img src="../../assets/empty-cart.png" class="h-[23rem] w-[25rem]" />
+  </div>
+</div>
+
+<ng-template #cart>
+  <div class="segment px-5 mt-[2rem] h-full">
+    <p-table
+      [value]="(cart$ | async)!.items"
+      [tableStyle]="{ 'min-width': '30rem' }"
+    >
+      <ng-template pTemplate="caption"> </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Name</th>
+          <th>Image</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-cartItem>
+        <tr>
+          <td class="font-semibold">{{ cartItem.productName }}</td>
+          <td>
+            <img
+              [src]="cartItem.imageUrl"
+              [alt]="cartItem.name"
+              width="100"
+              class="shadow-4 rounded-xl h-[4rem]"
+            />
+          </td>
+          <td>{{ cartItem.price | currency : "₦" }}</td>
+          <td>
+            <div class="flex items-center space-x-3">
+              <div
+                class="h-8 w-8 rounded-full bg-primary-100 flex items-center justify-center text-white cursor-pointer"
+              >
+                <i class="fa-solid fa-plus"></i>
+              </div>
+
+              <p>{{ cartItem.quantity }}</p>
+              <div
+                class="h-8 w-8 rounded-full bg-primary-100 flex items-center justify-center text-white cursor-pointer"
+              >
+                <i class="fa-solid fa-minus"></i>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="h-8 w-8 cursor-pointer text-red-700">
+              <i class="fa-solid fa-trash"></i>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <div class="segment py-5 mb-5" *ngIf="cartTotal$ | async as cartTotals">
+   <app-order-summary [cartTotals]="cartTotals"></app-order-summary>
+  </div>
+</ng-template>
