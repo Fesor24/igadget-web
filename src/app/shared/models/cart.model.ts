@@ -8,5 +8,5 @@ export interface IShoppingCart{
 
 export class ShoppingCart implements IShoppingCart{
   id: string = uuidv4();
-  items!: IShoppingCartItem[];
+  items: IShoppingCartItem[] = [];
 }
