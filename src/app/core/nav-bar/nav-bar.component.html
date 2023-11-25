@@ -4,15 +4,17 @@
     <div class="flex items-center space-x-5 text-secondary-800">
       <p routerLink="/" routerLinkActive="text-primary-300" [routerLinkActiveOptions]="{exact:true}"
       class="font-semibold text-lg cursor-pointer">Home</p>
-      <p routerLink="/about" routerLinkActive="text-primary-700"
+      <p routerLink="/cart" routerLinkActive="text-primary-300"
+      class="font-semibold text-lg cursor-pointer">Cart</p>
+      <p routerLink="/about" routerLinkActive="text-primary-300"
       class="font-semibold text-lg cursor-pointer">About</p>
-      <p routerLink="/contact-us" routerLinkActive="text-primary-700"
-      class="font-semibold text-lg cursor-pointer">Contact</p>
     </div>
     <div class="flex space-x-20 items-center">
       <div class="relative cursor-pointer" routerLink="/cart">
         <i class="fa-solid fa-cart-shopping text-lg text-dark-200"></i>
-        <p class="absolute -top-3 -right-[0.6rem] h-5 w-5 text-center pt-[0.1rem] pr-[0.1rem] text-secondary-700 font-Lilita text-xs rounded-full bg-primary-300">
+        <p class="absolute -top-3 -right-[0.6rem] h-5 w-5 text-center pt-[0.1rem] pr-[0.1rem] text-secondary-700 font-Lilita text-xs rounded-full bg-primary-300"
+        *ngIf="(cart$ | async) as cart"
+        >
           {{cart.items.length}}
         </p>
       </div>
