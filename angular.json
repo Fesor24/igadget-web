@@ -31,6 +31,8 @@
             ],
             "styles": [
               "./node_modules/ngx-toastr/toastr.css",
+              "node_modules/ngx-spinner/animations/ball-scale-multiple.css",
+              "node_modules/ngx-spinner/animations/timer.css",
               "./node_modules/font-awesome/css/font-awesome.min.css",
               "src/styles.scss"
             ],
