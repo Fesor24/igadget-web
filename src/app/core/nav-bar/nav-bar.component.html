@@ -12,7 +12,9 @@
     <div class="flex space-x-20 items-center">
       <div class="relative cursor-pointer" routerLink="/cart">
         <i class="fa-solid fa-cart-shopping text-lg text-dark-200"></i>
-        <p class="absolute -top-3 -right-[0.6rem] h-5 w-5 text-center pt-[0.1rem] pr-[0.1rem] text-secondary-700 font-Lilita text-xs rounded-full bg-primary-300">5</p>
+        <p class="absolute -top-3 -right-[0.6rem] h-5 w-5 text-center pt-[0.1rem] pr-[0.1rem] text-secondary-700 font-Lilita text-xs rounded-full bg-primary-300">
+          {{cart.items.length}}
+        </p>
       </div>
         <div class="btn-main shadow-lg shadow-primary-900">
       <a href="#">Login</a>
