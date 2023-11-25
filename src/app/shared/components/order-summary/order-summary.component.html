@@ -1,0 +1,28 @@
+<div class="grid grid-cols-6 gap-4">
+      <div class="col-start-5 col-end-7">
+        <h3
+          class="bg-primary-50 text-secondary-500 w-full py-4 rounded-sm font-semibold px-4"
+        >
+          Summary
+        </h3>
+        <p class="italic text-xs">Shipping costs will be added upon checkout</p>
+        <div class="flex items-center justify-between py-5">
+          <p class="font-medium">Shipping:</p>
+          <p class="font-medium">{{ cartTotals.shipping | currency : "₦" }}</p>
+        </div>
+
+        <div class="flex items-center justify-between py-5">
+          <p class="font-medium">Subtotals:</p>
+          <p class="font-medium">{{ cartTotals.subtotals | currency : "₦" }}</p>
+        </div>
+        <div class="flex items-center justify-between py-5">
+          <p class="font-medium">Totals:</p>
+          <p class="font-medium">{{ cartTotals.totals | currency : "₦" }}</p>
+        </div>
+
+        <div class="btn-main w-[80%] flex items-center space-x-3">
+          <i class="fa-regular fa-credit-card"></i>
+          <p class="font-bold">Proceed to Checkout</p>
+        </div>
+      </div>
+    </div>
