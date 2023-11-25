@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { CartService } from 'src/app/cart/cart.service';
 import { IShoppingCart, ShoppingCart } from 'src/app/shared/models/cart.model';
 
@@ -9,22 +10,16 @@ import { IShoppingCart, ShoppingCart } from 'src/app/shared/models/cart.model';
 })
 export class NavBarComponent implements OnInit {
 
-  cart: IShoppingCart = new ShoppingCart();
+  cart$!: Observable<IShoppingCart | null>
 
   constructor(private cartService: CartService){}
 
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.getCart();
   }
 
   getCart(){
-    const cart = this.cartService.getCurrentCartValue();
-
-    if(cart){
-      this.cart = cart;
-    }
-
-
+    this.cart$ = this.cartService.cart$;
   }
 
 }
