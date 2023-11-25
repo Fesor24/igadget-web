@@ -4,7 +4,7 @@ export default interface IProduct{
   description: string;
   price: number;
   yearOfRelease: number;
-  imageUrl: number;
+  imageUrl: string;
   category: string;
   brand: string;
 }
