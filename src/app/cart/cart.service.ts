@@ -65,6 +65,64 @@ export class CartService {
     this.addEditCart(cart);
   }
 
+  incrementItem(item: IShoppingCartItem){
+    const cart = this.getCurrentCartValue();
+
+    if(!cart) return;
+
+    const itemIndex = cart.items.findIndex(
+      (x) => x.productId == item.productId
+    );
+
+    cart.items[itemIndex].quantity++;
+
+    this.addEditCart(cart);
+  }
+
+  decrementItem(item: IShoppingCartItem){
+    const cart = this.getCurrentCartValue();
+
+    if (!cart) return;
+
+    const itemIndex = cart.items.findIndex(
+      (x) => x.productId == item.productId
+    );
+
+    if (cart.items[itemIndex].quantity > 1) {
+      cart.items[itemIndex].quantity--;
+      this.addEditCart(cart);
+    }else{
+      this.removeItem(cart.items[itemIndex]);
+    }
+  }
+
+  removeItem(item: IShoppingCartItem){
+    const cart = this.getCurrentCartValue();
+
+    if(!cart) return;
+
+    if(cart.items.some(x => x.productId === item.productId)){
+      cart.items = cart.items.filter(x => x.productId !== item.productId);
+
+      if(cart.items.length > 0){
+        this.addEditCart(cart);
+      }else{
+        this.deleteBasket(cart)
+      }
+    }
+  }
+
+  deleteBasket(cart: IShoppingCart){
+    return this.httpClient.delete(this.baseUrl + 'cart/' + cart.id).subscribe({
+      next: () => {
+        this.cartSource.next(null);
+        this.cartTotalsSource.next({shipping: 0, subtotals: 0, totals: 0})
+        localStorage.removeItem('cart_id');
+      },
+      error: err => console.log(err)
+    });
+  }
+
   private mapProductToCartItem(
     item: IProduct,
     quantity: number
