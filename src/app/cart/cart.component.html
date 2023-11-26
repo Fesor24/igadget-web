@@ -17,6 +17,7 @@
           <th>Image</th>
           <th>Price</th>
           <th>Quantity</th>
+          <th>Subtotals</th>
           <th></th>
         </tr>
       </ng-template>
@@ -36,6 +37,7 @@
             <div class="flex items-center space-x-3">
               <div
                 class="h-8 w-8 rounded-full bg-primary-100 flex items-center justify-center text-white cursor-pointer"
+                (click)="incrementCartItem(cartItem)"
               >
                 <i class="fa-solid fa-plus"></i>
               </div>
@@ -43,13 +45,16 @@
               <p>{{ cartItem.quantity }}</p>
               <div
                 class="h-8 w-8 rounded-full bg-primary-100 flex items-center justify-center text-white cursor-pointer"
+                (click)="decrementCartItem(cartItem)"
               >
                 <i class="fa-solid fa-minus"></i>
               </div>
             </div>
           </td>
+          <td>{{ cartItem.quantity * cartItem.price | currency : "₦" }}</td>
           <td>
-            <div class="h-8 w-8 cursor-pointer text-red-700">
+            <div class="h-8 w-8 cursor-pointer text-red-700"
+            (click)="removeCartItem(cartItem)">
               <i class="fa-solid fa-trash"></i>
             </div>
           </td>
