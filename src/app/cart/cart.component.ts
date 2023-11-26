@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from './cart.service';
 import { Observable } from 'rxjs';
 import { IShoppingCart, IShoppingCartTotals } from '../shared/models/cart.model';
+import { IShoppingCartItem } from '../shared/models/cart-item.model';
 
 @Component({
   selector: 'app-cart',
@@ -31,8 +32,16 @@ export class CartComponent implements OnInit {
     this.cartTotal$ = this.cartService.cartTotal$
   }
 
-  // incrementCartItem(item){
-  //   this.cartService.addItemToCart()
-  // }
+  incrementCartItem(item: IShoppingCartItem){
+    this.cartService.incrementItem(item);
+  }
+
+  decrementCartItem(item: IShoppingCartItem){
+    this.cartService.decrementItem(item);
+  }
+
+  removeCartItem(item: IShoppingCartItem){
+    this.cartService.removeItem(item);
+  }
 
 }
