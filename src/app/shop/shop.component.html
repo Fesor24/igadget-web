@@ -11,15 +11,17 @@
         <p class="text-base font-semibold pt-2">{{product.price | currency: 'N'}}</p>
         <div class="pt-3 flex space-x-3 items-center">
           <div class="h-[2rem] w-[2rem] rounded-full bg-primary-300
-          flex items-center justify-center cursor-pointer">
+          flex items-center justify-center cursor-pointer"
+          (click)="incrementQuantity()">
             <i class="fa-solid fa-plus text-secondary-100 font-extrabold"></i>
           </div>
-          <p>2</p>
+          <p>{{quantity}}</p>
           <div class="h-[2rem] w-[2rem] rounded-full bg-secondary-700
-          flex items-center justify-center cursor-pointer">
+          flex items-center justify-center cursor-pointer"
+          (click)="decrementQuantity()">
             <i class="fa-solid fa-minus text-primary-100"></i>
           </div>
-          <div class="btn-main">
+          <div class="btn-main" (click)="addItemToCart()">
             <i class="fa-solid fa-basket-shopping"></i>
           </div>
         </div>
