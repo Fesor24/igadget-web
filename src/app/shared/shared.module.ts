@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -9,7 +10,8 @@ import { OrderSummaryComponent } from './components/order-summary/order-summary.
     OrderSummaryComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   exports: [
     OrderSummaryComponent
