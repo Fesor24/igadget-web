@@ -18,6 +18,7 @@
     "@angular/platform-browser": "^16.0.0",
     "@angular/platform-browser-dynamic": "^16.0.0",
     "@angular/router": "^16.0.0",
+    "angular-auth-oidc-client": "^16.0.1",
     "font-awesome": "^4.7.0",
     "ngx-spinner": "^16.0.2",
     "ngx-toastr": "^18.0.0",
