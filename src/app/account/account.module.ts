@@ -1,16 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AccountComponent } from './account.component';
-import { AuthModule, LogLevel } from 'angular-auth-oidc-client';
+import { AbstractSecurityStorage, AuthModule, LogLevel } from 'angular-auth-oidc-client';
 import { environment } from 'src/environments/environment.development';
-import { SignInComponent } from './sign-in/sign-in.component';
-import { AccountRoutingModule } from './account-routing.module';
 
 @NgModule({
-  declarations: [AccountComponent, SignInComponent],
+  declarations: [AccountComponent],
   imports: [
     CommonModule,
-    AccountRoutingModule,
     AuthModule.forRoot({
       config: {
         configId: 'main-config',
@@ -26,9 +23,8 @@ import { AccountRoutingModule } from './account-routing.module';
         customParamsCodeRequest: {
           client_secret: environment.client_secret,
         },
-        disableIdTokenValidation: true
       },
     }),
-  ],
+  ]
 })
 export class AccountModule {}
