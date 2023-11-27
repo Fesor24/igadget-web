@@ -12,7 +12,7 @@ import { IShoppingCartItem } from '../shared/models/cart-item.model';
 export class CartService {
   baseUrl = environment.apiUrl;
 
-  private cartSource = new BehaviorSubject<IShoppingCart | null>(null);
+  private cartSource = new BehaviorSubject<IShoppingCart>(new ShoppingCart());
 
   cart$ = this.cartSource.asObservable();
 
@@ -59,6 +59,8 @@ export class CartService {
     );
 
     const cart = this.getCurrentCartValue() ?? this.createCart();
+
+    localStorage.setItem('cart_id', cart.id);
 
     cart.items = this.addOrUpdateCartItem(cart.items, cartItem, quantity);
 
@@ -115,7 +117,7 @@ export class CartService {
   deleteBasket(cart: IShoppingCart){
     return this.httpClient.delete(this.baseUrl + 'cart/' + cart.id).subscribe({
       next: () => {
-        this.cartSource.next(null);
+        this.cartSource.next(new ShoppingCart());
         this.cartTotalsSource.next({shipping: 0, subtotals: 0, totals: 0})
         localStorage.removeItem('cart_id');
       },
@@ -140,8 +142,6 @@ export class CartService {
 
   private createCart(): IShoppingCart {
     const cart = new ShoppingCart();
-
-    localStorage.setItem('cart_id', cart.id);
 
     return cart;
   }
