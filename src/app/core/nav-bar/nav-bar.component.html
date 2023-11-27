@@ -1,28 +1,73 @@
 <nav class="segment shadow-lg">
   <div class="flex justify-between items-center">
-    <h3 class="font-bold text-2xl cursor-pointer text-secondary-800" routerLink="/">IGad<span class="text-primary-300">get</span></h3>
+    <h3
+      class="font-bold text-2xl cursor-pointer text-secondary-800"
+      routerLink="/"
+    >
+      IGad<span class="text-primary-300">get</span>
+    </h3>
     <div class="flex items-center space-x-5 text-secondary-800">
-      <p routerLink="/" routerLinkActive="text-primary-300" [routerLinkActiveOptions]="{exact:true}"
-      class="font-semibold text-lg cursor-pointer">Home</p>
-      <p routerLink="/cart" routerLinkActive="text-primary-300"
-      class="font-semibold text-lg cursor-pointer">Cart</p>
-      <p routerLink="/about" routerLinkActive="text-primary-300"
-      class="font-semibold text-lg cursor-pointer">About</p>
+      <p
+        routerLink="/"
+        routerLinkActive="text-primary-300"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="font-semibold text-lg cursor-pointer"
+      >
+        Home
+      </p>
+      <p
+        routerLink="/cart"
+        routerLinkActive="text-primary-300"
+        class="font-semibold text-lg cursor-pointer"
+      >
+        Cart
+      </p>
+      <p
+        routerLink="/about"
+        routerLinkActive="text-primary-300"
+        class="font-semibold text-lg cursor-pointer"
+      >
+        About
+      </p>
     </div>
     <div class="flex space-x-20 items-center">
       <div class="relative cursor-pointer" routerLink="/cart">
         <i class="fa-solid fa-cart-shopping text-lg text-dark-200"></i>
-        <p class="absolute -top-3 -right-[0.6rem] h-5 w-5 text-center pt-[0.1rem] pr-[0.1rem] text-secondary-700 font-Lilita text-xs rounded-full bg-primary-300"
-        *ngIf="(cart$ | async) as cart"
+        <p
+          class="absolute -top-3 -right-[0.6rem] h-5 w-5 text-center pt-[0.1rem] pr-[0.1rem] text-secondary-700 font-Lilita text-xs rounded-full bg-primary-300"
+          *ngIf="cart$ | async as cart"
         >
-          {{cart.items.length}}
+          {{ cart.items.length }}
         </p>
       </div>
+      <ng-container *ngIf="user$ | async as user">
+        <div
+          *ngIf="
+            user.isAuthenticated && user.username.length > 0;
+            else notAuthenticated
+          "
+          class="flex items-center space-x-3"
+        >
+          <div class="dropdown dropdown-hover">
+            <div tabindex="0" role="button" class="btn m-1">
+              welcome {{ user.username }}
+              <i class="fa-solid fa-caret-down"></i>
+            </div>
+            <ul
+              class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+            >
+              <li routerLink="/cart"><a><i class="fa-solid fa-cart-shopping"></i> Cart</a></li>
+              <li routerLink="/orders"><a><i class="fa-solid fa-bag-shopping"></i> Orders</a></li>
+              <li (click)="logout()"><a><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+            </ul>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #notAuthenticated>
         <div class="btn-main shadow-lg shadow-primary-900" (click)="login()">
-      <p>Login</p>
+          <p>Login</p>
+        </div>
+      </ng-template>
     </div>
-
-    </div>
-
   </div>
 </nav>
