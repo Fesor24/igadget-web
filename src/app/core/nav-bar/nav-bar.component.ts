@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { Observable } from 'rxjs';
+import { AccountService } from 'src/app/account/account.service';
 import { CartService } from 'src/app/cart/cart.service';
 import { IShoppingCart, ShoppingCart } from 'src/app/shared/models/cart.model';
+import { IUser } from 'src/app/shared/models/user.model';
 
 @Component({
   selector: 'app-nav-bar',
@@ -13,10 +14,14 @@ export class NavBarComponent implements OnInit {
 
   cart$!: Observable<IShoppingCart | null>
 
-  constructor(private cartService: CartService, private oidcService: OidcSecurityService){}
+  user$!: Observable<IUser>
+
+  constructor(private cartService: CartService,
+    private accountService: AccountService){}
 
   ngOnInit(): void {
     this.getCart();
+    this.getUser();
   }
 
   getCart(){
@@ -24,8 +29,16 @@ export class NavBarComponent implements OnInit {
   }
 
   login(){
+    this.accountService.login();
+  }
 
-    this.oidcService.authorize('main-config');
+  logout(){
+    console.log("I was hit");
+    this.accountService.logout();
+  }
+
+  getUser(){
+    this.user$ = this.accountService.user$
   }
 
 }
