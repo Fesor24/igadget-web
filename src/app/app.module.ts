@@ -11,6 +11,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
+import { AccountModule } from './account/account.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
     CoreModule,
     ShopModule,
     HomeModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    AccountModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
