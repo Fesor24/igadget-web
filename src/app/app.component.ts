@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from './cart/cart.service';
 import { LoginResponse, OidcSecurityService } from 'angular-auth-oidc-client';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, catchError, map, of, switchMap } from 'rxjs';
+import { AccountService } from './account/account.service';
 
 @Component({
   selector: 'app-root',
@@ -11,8 +13,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class AppComponent implements OnInit {
   title = 'IGadget';
 
-  constructor(private cartService: CartService, private oidcService: OidcSecurityService,
-    private httpClient: HttpClient) {}
+  constructor(private cartService: CartService, private accountService: AccountService) {}
+
+    userData: any = {};
 
   ngOnInit(): void {
     this.getCart();
@@ -31,24 +34,11 @@ export class AppComponent implements OnInit {
 
   }
 
-  checkAuthStatus(){
-    this.oidcService.checkAuth().subscribe({
-      next: (response: LoginResponse) => {
-        if(response.isAuthenticated){
-          console.log(response);
-          let httpHeaders = new HttpHeaders();
-
-          httpHeaders = httpHeaders.set('Authorization', `Bearer ${response.accessToken}`)
-
-          this.httpClient.get('http://localhost:5000/connect/userinfo', {headers: httpHeaders})
-          .subscribe({
-            next: res => console.log(res),
-            error: err => console.log(err)
-          });
-
-        }
-      },
+  checkAuthStatus() {
+    this.accountService.checkAuthStatus().subscribe({
+      next: data => console.log(data),
       error: err => console.log(err)
     })
-  }
+}
+
 }
