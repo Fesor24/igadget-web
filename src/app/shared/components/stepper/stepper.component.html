@@ -1,9 +1,11 @@
 <div class="w-full">
-  <ul class="flex items-center justify-evenly border border-primary-300 py-5">
+  <ul class="grid grid-cols-3 border border-primary-50 rounded-lg">
     <li *ngFor="let step of steps; let i = index">
       <button
+       class="py-5 bg-primary-100 w-full"
         (click)="onClick(i)"
         [class.bg-primary-500]="selectedIndex === i"
+        [class.text-primary-100]="selectedIndex === i"
       >{{step.label}}</button>
     </li>
 </ul>
