@@ -5,7 +5,7 @@
 </div>
 
 <ng-template #cart>
-  <div class="segment px-5 mt-[2rem] h-full">
+  <div class="segment px-5 mt-[2rem] min-h-[15rem]">
     <p-table
       [value]="(cart$ | async)!.items"
       [tableStyle]="{ 'min-width': '30rem' }"
@@ -64,6 +64,6 @@
   </div>
 
   <div class="segment py-5 mb-5" *ngIf="cartTotal$ | async as cartTotals">
-   <app-order-summary [cartTotals]="cartTotals"></app-order-summary>
+   <app-order-summary [cartTotals]="cartTotals" [btnText]="'Proceed to checkout'"></app-order-summary>
   </div>
 </ng-template>
