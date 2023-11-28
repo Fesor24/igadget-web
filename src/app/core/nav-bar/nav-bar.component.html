@@ -43,7 +43,7 @@
       <ng-container *ngIf="user$ | async as user">
         <div
           *ngIf="
-            user.isAuthenticated && user.username.length > 0;
+            user.isAuthenticated;
             else notAuthenticated
           "
           class="flex items-center space-x-3"
