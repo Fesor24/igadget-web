@@ -1,0 +1,17 @@
+<div class="w-full">
+  <ul class="flex items-center justify-evenly border border-primary-300 py-5">
+    <li *ngFor="let step of steps; let i = index">
+      <button
+        (click)="onClick(i)"
+        [class.bg-primary-500]="selectedIndex === i"
+      >{{step.label}}</button>
+    </li>
+</ul>
+<div>
+  <ng-container [ngTemplateOutlet]="selected!.content">
+
+  </ng-container>
+</div>
+</div>
+
+
