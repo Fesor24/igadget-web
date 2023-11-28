@@ -1,1 +1,23 @@
-<p>checkout works!</p>
+<div class="segment mt-[5rem] py-5 min-h-[29rem]">
+  <div class="flex">
+    <div class="w-full">
+      <app-stepper [linearModeSelected]="false" #appStepper>
+        <cdk-step [label]="'Address'">
+          Step 1
+        </cdk-step>
+
+         <cdk-step [label]="'Delivery'">
+          Step 2
+        </cdk-step>
+
+          <cdk-step [label]="'Review'">
+          Step 3
+        </cdk-step>
+      </app-stepper>
+    </div>
+    <div *ngIf="(cartTotal$ | async) as cartTotals" class="">
+      <app-order-summary [cartTotals]="cartTotals" [btnText]="'Complete order'"></app-order-summary>
+    </div>
+  </div>
+
+</div>
