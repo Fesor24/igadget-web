@@ -4,6 +4,7 @@ import { OrderSummaryComponent } from './components/order-summary/order-summary.
 import { RouterModule } from '@angular/router';
 import { CdkStepperModule } from '@angular/cdk/stepper';
 import { StepperComponent } from './components/stepper/stepper.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -15,12 +16,14 @@ import { StepperComponent } from './components/stepper/stepper.component';
   imports: [
     CommonModule,
     RouterModule,
-    CdkStepperModule
+    CdkStepperModule,
+    ReactiveFormsModule
   ],
   exports: [
     OrderSummaryComponent,
     CdkStepperModule,
-    StepperComponent
+    StepperComponent,
+    ReactiveFormsModule
   ]
 })
 export class SharedModule { }
