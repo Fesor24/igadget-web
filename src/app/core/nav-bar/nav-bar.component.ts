@@ -33,12 +33,11 @@ export class NavBarComponent implements OnInit {
   }
 
   logout(){
-    console.log("I was hit");
     this.accountService.logout();
   }
 
   getUser(){
-    this.user$ = this.accountService.user$
+    this.user$ = this.accountService.user$;
   }
 
 }
