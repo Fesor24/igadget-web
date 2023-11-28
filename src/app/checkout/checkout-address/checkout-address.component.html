@@ -1,0 +1,39 @@
+<div class="mt-5" [formGroup]="checkoutForm">
+  <div class="flex justify-between items-center">
+    <h3 class="font-semibold text-lg py-3">Delivery address</h3>
+  </div>
+  <div formGroupName="addressForm" class="grid grid-cols-2 gap-4">
+    <div class="flex flex-col space-y-2">
+      <label>Street</label>
+      <input formControlName="street" class="w-[17rem] h-[2.2rem] border border-primary-300 rounded-lg focus:border-primary-500">
+      <span *ngIf="checkoutForm.get('addressForm')!.get('street')?.touched
+      && checkoutForm.get('addressForm')!.get('street')?.errors" class="text-red-500">
+        Street is a required field
+    </span>
+    </div>
+    <div class="flex flex-col space-y-2">
+      <label>City</label>
+      <input formControlName="city" class="w-[17rem] h-[2.2rem] border border-primary-300 rounded-lg">
+          <span *ngIf="checkoutForm.get('addressForm')!.get('city')?.touched
+      && checkoutForm.get('addressForm')!.get('city')?.errors" class="text-red-500">
+        City is a required field
+    </span>
+    </div>
+    <div class="flex flex-col space-y-2">
+      <label>State</label>
+      <input formControlName="state" class="w-[17rem] h-[2.2rem] border border-primary-300 rounded-lg">
+          <span *ngIf="checkoutForm.get('addressForm')!.get('state')?.touched
+      && checkoutForm.get('addressForm')!.get('state')?.errors" class="text-red-500">
+        State is a required field
+    </span>
+    </div>
+    <div class="flex flex-col space-y-2">
+      <label>Zip code</label>
+      <input formControlName="zipCode" class="w-[17rem] h-[2.2rem] border border-primary-300 rounded-lg">
+          <span *ngIf="checkoutForm.get('addressForm')!.get('zipCode')?.touched
+      && checkoutForm.get('addressForm')!.get('zipCode')?.errors" class="text-red-500">
+        Zip code is a required field
+    </span>
+    </div>
+  </div>
+</div>
