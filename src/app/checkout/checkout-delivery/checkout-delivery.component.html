@@ -1,0 +1,19 @@
+<div class="mt-5" [formGroup]="checkoutForm">
+  <div formGroupName="deliveryForm">
+    <div class="grid grid-cols-2 gap-4">
+      <div *ngFor="let method of deliveryMethods">
+        <input
+          type="radio"
+          id="{{method.id}}"
+          value="{{method.id}}"
+          formControlName="deliveryMethod"
+        >
+        <label for="{{method.id}}" class="ml-2">
+          <strong>{{method.name}} - {{method.price | currency: 'N'}}</strong>
+          <br>
+          <span class="ml-5">{{method.deliveryTime}}</span>
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
