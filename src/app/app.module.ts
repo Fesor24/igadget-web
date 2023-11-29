@@ -12,7 +12,6 @@ import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
 import { AccountModule } from './account/account.module';
-import { AuthInterceptor } from 'angular-auth-oidc-client';
 
 @NgModule({
   declarations: [
@@ -30,7 +29,6 @@ import { AuthInterceptor } from 'angular-auth-oidc-client';
     AccountModule
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true}
   ],
