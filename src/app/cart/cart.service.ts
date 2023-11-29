@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment.development';
 import { IShoppingCart, IShoppingCartTotals, ShoppingCart } from '../shared/models/cart.model';
 import IProduct from '../shared/models/product.model';
 import { IShoppingCartItem } from '../shared/models/cart-item.model';
+import { IDeliveryMethods } from '../shared/models/delivery.model';
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +24,8 @@ export class CartService {
   });
 
   cartTotal$ = this.cartTotalsSource.asObservable();
+
+  deliveryCharge = 0;
 
   constructor(private httpClient: HttpClient) {}
 
@@ -109,12 +112,12 @@ export class CartService {
       if(cart.items.length > 0){
         this.addEditCart(cart);
       }else{
-        this.deleteBasket(cart)
+        this.deleteCart(cart)
       }
     }
   }
 
-  deleteBasket(cart: IShoppingCart){
+  deleteCart(cart: IShoppingCart){
     return this.httpClient.delete(this.baseUrl + 'cart/' + cart.id).subscribe({
       next: () => {
         this.cartSource.next(new ShoppingCart());
@@ -123,6 +126,21 @@ export class CartService {
       },
       error: err => console.log(err)
     });
+  }
+
+  deleteLocalCart(){
+    this.cartSource.next(new ShoppingCart());
+    this.cartTotalsSource.next({
+      shipping: 0,
+      subtotals: 0,
+      totals: 0
+    })
+    localStorage.removeItem('cart_id');
+  }
+
+  setDeliveryCharge(deliveryMethod: IDeliveryMethods){
+    this.deliveryCharge = deliveryMethod.price;
+    this.calculateCartTotals();
   }
 
   private mapProductToCartItem(
@@ -166,8 +184,8 @@ export class CartService {
 
     const cart = this.getCurrentCartValue();
 
-    const shipping = 0;
-    const subtotals = cart && cart.items ? cart.items.reduce((a,b) => b.quantity * b.price + a, 0) : 0;
+    const shipping = this.deliveryCharge;
+    const subtotals = cart.items.reduce((a,b) => b.quantity * b.price + a, 0);
     const totals = shipping + subtotals;
 
     this.cartTotalsSource.next({shipping, subtotals, totals})
