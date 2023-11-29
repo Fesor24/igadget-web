@@ -1,17 +1,17 @@
 <div class="mt-5" [formGroup]="checkoutForm">
-  <div class="flex justify-between items-center">
-    <h3 class="font-semibold text-lg py-3">Delivery address</h3>
+  <div class="flex justify-between items-center w-full">
+    <h3 class="font-semibold text-lg py-3 text-center w-full">Delivery address</h3>
   </div>
-  <div formGroupName="addressForm" class="grid grid-cols-2 gap-4">
-    <div class="flex flex-col space-y-2">
+  <div formGroupName="addressForm" class="grid grid-cols-2 gap-4 w-full">
+    <div class="flex flex-col space-y-2 items-center">
       <label>Street</label>
-      <input formControlName="street" class="w-[17rem] h-[2.2rem] border border-primary-300 rounded-lg focus:border-primary-500">
+      <input formControlName="street" class="px-4 w-[17rem] h-[2.2rem] border border-primary-300 rounded-lg focus:border-primary-500">
       <span *ngIf="checkoutForm.get('addressForm')!.get('street')?.touched
       && checkoutForm.get('addressForm')!.get('street')?.errors" class="text-red-500">
         Street is a required field
     </span>
     </div>
-    <div class="flex flex-col space-y-2">
+    <div class="flex flex-col space-y-2 items-center">
       <label>City</label>
       <input formControlName="city" class="w-[17rem] h-[2.2rem] border border-primary-300 rounded-lg">
           <span *ngIf="checkoutForm.get('addressForm')!.get('city')?.touched
@@ -19,7 +19,7 @@
         City is a required field
     </span>
     </div>
-    <div class="flex flex-col space-y-2">
+    <div class="flex flex-col space-y-2 items-center">
       <label>State</label>
       <input formControlName="state" class="w-[17rem] h-[2.2rem] border border-primary-300 rounded-lg">
           <span *ngIf="checkoutForm.get('addressForm')!.get('state')?.touched
@@ -27,7 +27,7 @@
         State is a required field
     </span>
     </div>
-    <div class="flex flex-col space-y-2">
+    <div class="flex flex-col space-y-2 items-center">
       <label>Zip code</label>
       <input formControlName="zipCode" class="w-[17rem] h-[2.2rem] border border-primary-300 rounded-lg">
           <span *ngIf="checkoutForm.get('addressForm')!.get('zipCode')?.touched
@@ -37,3 +37,13 @@
     </div>
   </div>
 </div>
+
+<div class="flex justify-between items-center mt-5">
+  <button class="btn-icon" [routerLink]="['/cart']">
+    <i class="fa-solid fa-left-long"></i>
+  </button>
+  <button class="btn-icon" cdkStepperNext >
+    <i class="fa-solid fa-right-long"></i>
+  </button>
+</div>
+
