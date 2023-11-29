@@ -1,0 +1,23 @@
+<div class="segment">
+<p-table [value]="orders">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Date</th>
+            <th>Payment Status</th>
+            <th>Order Status</th>
+            <th>Amount</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-order>
+        <tr [routerLink]="['/orders', order.orderId]" class="cursor-pointer">
+            <td>{{order.date}}</td>
+            <td>{{order.paymentStatus}}</td>
+            <td>{{order.orderStatus}}</td>
+            <td>{{order.total}}</td>
+        </tr>
+    </ng-template>
+</p-table>
+</div>
+
+
+
