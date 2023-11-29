@@ -6,6 +6,7 @@ import { SharedModule } from '../shared/shared.module';
 import { CheckoutAddressComponent } from './checkout-address/checkout-address.component';
 import { CheckoutReviewComponent } from './checkout-review/checkout-review.component';
 import { CheckoutDeliveryComponent } from './checkout-delivery/checkout-delivery.component';
+import { CheckoutSuccessComponent } from './checkout-success/checkout-success.component';
 
 
 
@@ -14,7 +15,8 @@ import { CheckoutDeliveryComponent } from './checkout-delivery/checkout-delivery
     CheckoutComponent,
     CheckoutAddressComponent,
     CheckoutReviewComponent,
-    CheckoutDeliveryComponent
+    CheckoutDeliveryComponent,
+    CheckoutSuccessComponent
   ],
   imports: [
     CommonModule,
