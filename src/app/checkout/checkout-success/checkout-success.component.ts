@@ -9,6 +9,7 @@ import { IOrder } from 'src/app/shared/models/order.model';
 })
 export class CheckoutSuccessComponent {
   order!: IOrder;
+  myNum = 5;
 
   constructor(private router: Router){
     const navigation = this.router.getCurrentNavigation();
@@ -16,7 +17,16 @@ export class CheckoutSuccessComponent {
 
     if(state){
       this.order = state as IOrder;
-      console.log("ord from extras",this.order);
+      const intervalId = setInterval(() => {
+        if(this.myNum > 0){
+          this.myNum--;
+        }else{
+          clearInterval(intervalId);
+          this.router.navigate([`/orders/${this.order.orderId}`])
+        }
+      }, 1000);
+    }else{
+      this.router.navigate(['/']);
     }
   }
 }
