@@ -1,19 +1,29 @@
 <div class="mt-5" [formGroup]="checkoutForm">
   <div formGroupName="deliveryForm">
-    <div class="grid grid-cols-2 gap-4">
+    <div class="grid grid-cols-2 gap-4 gap-y-10">
       <div *ngFor="let method of deliveryMethods">
         <input
           type="radio"
           id="{{method.id}}"
           value="{{method.id}}"
           formControlName="deliveryMethod"
+          (click)="setDeliveryCharge(method)"
         >
         <label for="{{method.id}}" class="ml-2">
-          <strong>{{method.name}} - {{method.price | currency: 'N'}}</strong>
+          <strong>{{method.name}} - {{method.price | currency: '₦'}}</strong>
           <br>
           <span class="ml-5">{{method.deliveryTime}}</span>
         </label>
       </div>
     </div>
   </div>
+</div>
+
+<div class="flex justify-between items-center mt-5">
+  <button class="btn-icon" cdkStepperPrevious>
+    <i class="fa-solid fa-left-long"></i>
+  </button>
+  <button class="btn-icon" cdkStepperNext >
+    <i class="fa-solid fa-right-long"></i>
+  </button>
 </div>
