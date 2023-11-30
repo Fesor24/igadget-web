@@ -1,7 +1,7 @@
 <div class="segment mt-[5rem] py-5 min-h-[29rem]">
   <div class="grid grid-cols-3 gap-8">
     <div class="col-span-2">
-      <app-stepper [linearModeSelected]="false" #appStepper>
+      <app-stepper [linearModeSelected]="true" #appStepper>
         <cdk-step [label]="'Address'" [completed]="(checkoutForm.get('addressForm'))!.valid">
           <app-checkout-address [checkoutForm]="checkoutForm"></app-checkout-address>
         </cdk-step>
@@ -16,7 +16,8 @@
       </app-stepper>
     </div>
     <div *ngIf="(cartTotal$ | async) as cartTotals" class="">
-      <app-order-summary [cartTotals]="cartTotals" [btnText]="'Complete order'"></app-order-summary>
+      <app-order-summary [cartTotals]="cartTotals" [btnText]="'Complete order'" [showBtn]="false">
+      </app-order-summary>
     </div>
   </div>
 
