@@ -65,6 +65,7 @@
 
   <div class="segment py-5 mb-5 grid grid-cols-3" *ngIf="cartTotal$ | async as cartTotals">
     <div class="col-span-2"></div>
-   <app-order-summary [cartTotals]="cartTotals" [btnText]="'Proceed to checkout'"></app-order-summary>
+   <app-order-summary [cartTotals]="cartTotals" [btnText]="'Proceed to checkout'" [showBtn]="true">
+  </app-order-summary>
   </div>
 </ng-template>
