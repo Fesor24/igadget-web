@@ -28,4 +28,19 @@ export class OrdersService {
       })
     )
   }
+
+  getOrder(orderId: number){
+    return this.accountService.user$.pipe(
+      switchMap(user => {
+        if(user.isAuthenticated){
+          let headers = new HttpHeaders();
+          headers = headers.set('Authorization', `Bearer ${user.accessToken}`);
+
+          return this.http.get<IOrder>(this.baseUrl + 'order/' + orderId, {headers});
+        }else{
+          return of(null);
+        }
+      })
+    )
+  }
 }
