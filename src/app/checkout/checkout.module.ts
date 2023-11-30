@@ -21,7 +21,8 @@ import { CheckoutSuccessComponent } from './checkout-success/checkout-success.co
   imports: [
     CommonModule,
     CheckoutRoutingModule,
-    SharedModule
+    SharedModule,
+
   ]
 })
 export class CheckoutModule { }
