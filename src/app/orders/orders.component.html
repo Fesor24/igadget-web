@@ -1,5 +1,10 @@
 <div class="segment">
-<p-table [value]="orders">
+    <div *ngIf="orders.length < 1;else orderPlaced">
+        <p class="font-semibold text-xl">You have not placed any order</p>
+    </div>
+
+<ng-template #orderPlaced>
+    <p-table [value]="orders">
     <ng-template pTemplate="header">
         <tr>
             <th>Date</th>
@@ -17,6 +22,8 @@
         </tr>
     </ng-template>
 </p-table>
+</ng-template>
+
 </div>
 
 
