@@ -16,6 +16,7 @@ import { NavigationExtras, Router } from '@angular/router';
 export class CheckoutReviewComponent implements OnInit {
   cart$!: Observable<IShoppingCart>;
   @Input() checkoutForm!: FormGroup;
+  loading: boolean = false;
 
   constructor(private cartService: CartService, private checkoutService: CheckoutService,
     private toastr: ToastrService, private router: Router){}
@@ -29,6 +30,7 @@ export class CheckoutReviewComponent implements OnInit {
   }
 
   onSubmitOrder(){
+    this.loading = true;
     const cart = this.cartService.getCurrentCartValue();
     const orderCreate = this.createOrder(cart);
 
@@ -46,6 +48,9 @@ export class CheckoutReviewComponent implements OnInit {
       error: err => {
         this.toastr.error(err);
         console.log(err);
+      },
+      complete: () => {
+        this.loading = false
       }
     })
   }
