@@ -22,7 +22,7 @@ import { ToastrModule } from 'ngx-toastr';
   ],
   exports: [
     NavBarComponent,
-    FooterComponent
+    FooterComponent,
   ]
 })
 export class CoreModule { }
