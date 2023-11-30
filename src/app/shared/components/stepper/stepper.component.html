@@ -4,6 +4,7 @@
       <button
        class="py-5 bg-primary-100 w-full"
         (click)="onClick(i)"
+        [disabled]="true"
         [class.bg-primary-500]="selectedIndex === i"
         [class.text-primary-100]="selectedIndex === i"
       >{{step.label}}</button>
