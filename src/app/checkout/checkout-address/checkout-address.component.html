@@ -5,7 +5,8 @@
   <div formGroupName="addressForm" class="grid grid-cols-2 gap-4 w-full">
     <div class="flex flex-col space-y-2 items-center">
       <label>Street</label>
-      <input formControlName="street" class="px-4 w-[17rem] h-[2.2rem] border border-primary-300 rounded-lg focus:border-primary-500">
+      <input formControlName="street" class="px-4 w-[17rem] h-[2.2rem] border
+      border-primary-300 rounded-lg focus:outline-none focus:border-primary-500">
       <span *ngIf="checkoutForm.get('addressForm')!.get('street')?.touched
       && checkoutForm.get('addressForm')!.get('street')?.errors" class="text-red-500">
         Street is a required field
@@ -13,7 +14,8 @@
     </div>
     <div class="flex flex-col space-y-2 items-center">
       <label>City</label>
-      <input formControlName="city" class="w-[17rem] h-[2.2rem] border border-primary-300 rounded-lg">
+      <input formControlName="city" class="px-4 w-[17rem] h-[2.2rem] border
+       border-primary-300 rounded-lg focus:outline-none focus:border-primary-500">
           <span *ngIf="checkoutForm.get('addressForm')!.get('city')?.touched
       && checkoutForm.get('addressForm')!.get('city')?.errors" class="text-red-500">
         City is a required field
@@ -21,7 +23,8 @@
     </div>
     <div class="flex flex-col space-y-2 items-center">
       <label>State</label>
-      <input formControlName="state" class="w-[17rem] h-[2.2rem] border border-primary-300 rounded-lg">
+      <input formControlName="state" class="px-4 w-[17rem] h-[2.2rem] border
+      border-primary-300 rounded-lg focus:outline-none focus:border-primary-500">
           <span *ngIf="checkoutForm.get('addressForm')!.get('state')?.touched
       && checkoutForm.get('addressForm')!.get('state')?.errors" class="text-red-500">
         State is a required field
@@ -29,7 +32,8 @@
     </div>
     <div class="flex flex-col space-y-2 items-center">
       <label>Zip code</label>
-      <input formControlName="zipCode" class="w-[17rem] h-[2.2rem] border border-primary-300 rounded-lg">
+      <input formControlName="zipCode" class="px-4 w-[17rem] h-[2.2rem] border
+      border-primary-300 rounded-lg focus:outline-none focus:border-primary-500">
           <span *ngIf="checkoutForm.get('addressForm')!.get('zipCode')?.touched
       && checkoutForm.get('addressForm')!.get('zipCode')?.errors" class="text-red-500">
         Zip code is a required field
@@ -42,7 +46,7 @@
   <button class="btn-icon" [routerLink]="['/cart']">
     <i class="fa-solid fa-left-long"></i>
   </button>
-  <button class="btn-icon" cdkStepperNext >
+  <button [disabled]="checkoutForm.get('addressForm')!.invalid" class="btn-icon" cdkStepperNext >
     <i class="fa-solid fa-right-long"></i>
   </button>
 </div>
