@@ -9,4 +9,6 @@ import { IShoppingCartTotals } from '../../models/cart.model';
 export class OrderSummaryComponent {
 @Input() cartTotals!: IShoppingCartTotals;
 @Input() btnText!: string;
+@Input() showBtn!: boolean;
+
 }
